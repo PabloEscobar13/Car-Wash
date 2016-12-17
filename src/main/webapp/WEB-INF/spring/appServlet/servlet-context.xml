@@ -13,7 +13,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd ">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+
+    <!--Property placeholder-->
+    <context:property-placeholder location="classpath:ds-hibernate-cfg.properties" />
+
 	<!-- Enables the Spring MVC @Controller programming model -->
     <annotation-driven/>
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
@@ -29,11 +32,10 @@
 
     <beans:bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
                 destroy-method="close">
-        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <beans:property name="url"
-                        value="jdbc:mysql://localhost:3306/carwash" />
-        <beans:property name="username" value="Employee" />
-        <beans:property name="password" value="Pass" />
+        <beans:property name="driverClassName" value="${ds.database-driver}" />
+        <beans:property name="url" value="${ds.url}" />
+        <beans:property name="username" value="${ds.username}"/>
+        <beans:property name="password" value="${ds.password}" />
     </beans:bean>
 
     <!-- Hibernate 4 SessionFactory Bean definition -->
@@ -50,9 +52,9 @@
         </beans:property>
         <beans:property name="hibernateProperties">
             <beans:props>
-                <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</beans:prop>
-                <beans:prop key="hibernate.show_sql">true</beans:prop>
-                <beans:prop key="hibernate.ddl-auto=create-drop">true</beans:prop>
+                <beans:prop key="hibernate.dialect">${hibernate.dialect}</beans:prop>
+                <beans:prop key="hibernate.show_sql">${hibernate.show_sql}</beans:prop>
+                <beans:prop key="hibernate.ddl-auto=create-drop">${hibernate.hbm2ddl.auto}</beans:prop>
             </beans:props>
         </beans:property>
     </beans:bean>

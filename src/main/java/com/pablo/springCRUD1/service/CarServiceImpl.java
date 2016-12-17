@@ -2,12 +2,10 @@ package com.pablo.springCRUD1.service;
 
 import com.pablo.springCRUD1.dao.CarDAO;
 import com.pablo.springCRUD1.Entity.Car;
-import com.pablo.springCRUD1.model.CarInfo;
 import com.pablo.springCRUD1.service.washLogic.CostCounter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,33 +24,34 @@ public class CarServiceImpl implements CarService {
     @Override
     @Transactional
     public void addCar(Car car) {
+
+        car.setCost(costCounter.getCarCost(car));
+        car.setStation(costCounter.getStation(car));
+
         this.carDAO.addCar(car);
     }
 
     @Override
     @Transactional
-    public void updateCar(Car c) {
-        this.carDAO.updateCar(c);
+    public void updateCar(Car car) {
+
+        car.setCost(costCounter.getCarCost(car));
+        car.setStation(costCounter.getStation(car));
+
+        this.carDAO.updateCar(car);
     }
 
     @Override
     @Transactional
-    public List<CarInfo> listCars(int clientID) {
+    public List<Car> listCars(int clientID) {
 
-        List<CarInfo> carInfoList = new ArrayList<CarInfo>();
-
-        List<Car> cars = this.carDAO.listCars(clientID);
-        for(Car c: cars){
-            carInfoList.add(new CarInfo(c));
-        }
-
-        return carInfoList;
+        return this.carDAO.listCars(clientID);
     }
 
     @Override
     @Transactional
-    public CarInfo getCarById(int id) {
-        return new CarInfo(this.carDAO.getCarById(id));
+    public Car getCarById(int id) {
+        return this.carDAO.getCarById(id);
     }
 
     @Override

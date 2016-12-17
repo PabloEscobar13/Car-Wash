@@ -20,7 +20,7 @@
 <jsp:include page="myHeader.jsp"/>
 <jsp:include page="menu.jsp"/>
 
-<h2>Current client: ${car.client.firstName} ${car.client.lastName} </h2>
+<h2>Current client: ${carInfo.car.client.firstName} ${carInfo.car.client.lastName} </h2>
 <h3>Add new Car</h3>
 
 <h4>Attention! Our Car Wash accept only cars with limited size.</h4>
@@ -133,18 +133,18 @@
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
-        <c:forEach items="${listCars}" var="carInfo">
+        <c:forEach items="${listCars}" var="car">
             <tr>
-                <td>${carInfo.car.client.id}</td>
-                <td>${carInfo.car.model}</td>
-                <td>${carInfo.car.width}</td>
-                <td>${carInfo.car.height}</td>
-                <td>${carInfo.car.waxing}</td>
-                <td>${carInfo.car.plateNumber}</td>
-                <td>${carInfo.cost}</td>
-                <td>${carInfo.station}</td>
-                <td><a href="<c:url value='/client/carlist/${carInfo.car.client.id}/edit/${car.id}' />">Edit</a></td>
-                <td><a href="<c:url value='/client/carlist/${carInfo.car.client.id}/remove/${car.id}' />">Delete</a></td>
+                <td>${car.id}</td>
+                <td>${car.model}</td>
+                <td>${car.width}</td>
+                <td>${car.height}</td>
+                <td>${car.waxing}</td>
+                <td>${car.plateNumber}</td>
+                <td>${car.cost}</td>
+                <td>${car.station}</td>
+                <td><a href="<c:url value='/client/carlist/${car.client.id}/edit/${car.id}' />">Edit</a></td>
+                <td><a href="<c:url value='/client/carlist/${car.client.id}/remove/${car.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

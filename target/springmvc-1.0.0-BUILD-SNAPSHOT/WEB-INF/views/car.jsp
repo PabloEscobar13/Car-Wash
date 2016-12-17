@@ -20,14 +20,14 @@
 <jsp:include page="myHeader.jsp"/>
 <jsp:include page="menu.jsp"/>
 
-<h2>Current client: ${car.client.firstName} ${car.client.lastName} </h2>
+<h2>Current client: ${carInfo.car.client.firstName} ${carInfo.car.client.lastName} </h2>
 <h3>Add new Car</h3>
 
 <h4>Attention! Our Car Wash accept only cars with limited size.</h4>
     width<2.5 meters
     &nbsp;|&nbsp;
     height<2.3 meters
-<c:url var="addAction" value="${pageContext.request.contextPath}/client/carlist/add"></c:url>
+<c:url var="addAction" value="${pageContext.request.contextPath}/client/carlist/add"/>
 
 <form:form  action="${addAction}" modelAttribute="car" >
     <table>
@@ -128,17 +128,21 @@
             <th width="60">High</th>
             <th width="70">Waxing</th>
             <th width="100">Plate Number</th>
+            <th width="60">Cost</th>
+            <th width="80">Station</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
         <c:forEach items="${listCars}" var="car">
             <tr>
-                <td>${car.client.id}</td>
+                <td>${car.id}</td>
                 <td>${car.model}</td>
                 <td>${car.width}</td>
                 <td>${car.height}</td>
                 <td>${car.waxing}</td>
                 <td>${car.plateNumber}</td>
+                <td>${car.cost}</td>
+                <td>${car.station}</td>
                 <td><a href="<c:url value='/client/carlist/${car.client.id}/edit/${car.id}' />">Edit</a></td>
                 <td><a href="<c:url value='/client/carlist/${car.client.id}/remove/${car.id}' />">Delete</a></td>
             </tr>

@@ -2,6 +2,7 @@ package com.pablo.springCRUD1.Entity;
 
 
 import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 /**
@@ -35,6 +36,16 @@ public class Car {
     @Column
     @NotNull
     private String plateNumber;
+
+    @Column
+    private double cost;
+
+    @Column
+    private boolean complete;
+
+    @Column
+    private String station;
+
 
     public Car() {
     }
@@ -100,16 +111,43 @@ public class Car {
         this.plateNumber = plateNumber;
     }
 
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
+    }
+
+    public String getStation() {
+        return station;
+    }
+
+    public void setStation(String station) {
+        this.station = station;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "id=" + id +
-//                ", client=" + client +
+                ", client=" + client +
                 ", model='" + model + '\'' +
                 ", width=" + width +
                 ", height=" + height +
                 ", waxing=" + waxing +
                 ", plateNumber='" + plateNumber + '\'' +
+                ", cost=" + cost +
+                ", complete=" + complete +
+                ", station='" + station + '\'' +
                 '}';
     }
 }
